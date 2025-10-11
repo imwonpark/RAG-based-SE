@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+vendor/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+*.log
+
+# Data
+backend/data/raw/*
+backend/data/processed/*
+backend/data/vector_store/*
+!backend/data/raw/.gitkeep
+!backend/data/processed/.gitkeep
+
+# Node
+node_modules/
+dist/
+.npm
+
+# Database
+*.db
+*.sqlite
+
+# OS
+Thumbs.db

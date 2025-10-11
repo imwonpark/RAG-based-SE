@@ -1,0 +1,41 @@
+# Vector Database Configuration
+vector_db:
+  type: "chromadb"  # or "faiss"
+  persist_directory: "./data/vector_store"
+  collection_name: "engineering_docs"
+
+# Embedding Configuration
+embedding:
+  model: "text-embedding-3-small"  # or "sentence-transformers/all-MiniLM-L6-v2"
+  dimension: 1536
+  batch_size: 32
+
+# Chunking Configuration
+chunking:
+  chunk_size: 512
+  chunk_overlap: 50
+  separator: "\n\n"
+
+# LLM Configuration
+llm:
+  model: "gpt-3.5-turbo"
+  temperature: 0.7
+  max_tokens: 500
+
+# Retrieval Configuration
+retrieval:
+  top_k: 5
+  similarity_threshold: 0.7
+
+# API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  
+# MySQL Configuration
+mysql:
+  host: "localhost"
+  port: 3306
+  database: "rag_search"
+  user: "root"
+  password: ""
