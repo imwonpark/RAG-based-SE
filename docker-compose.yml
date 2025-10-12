@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: rag_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: rag_search
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  python_api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rag_python_api
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=
+      - MYSQL_HOST=mysql
+    volumes:
+      - ./backend:/app
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  go_api:
+    build:
+      context: ./go-api
+      dockerfile: Dockerfile
+    container_name: rag_go_api
+    ports:
+      - "8080:8080"
+    environment:
+      - PYTHON_API_URL=http://python_api:8000
+      - MYSQL_HOST=mysql
+    depends_on:
+      - python_api
+      - mysql
+
+volumes:
+  mysql_data:
