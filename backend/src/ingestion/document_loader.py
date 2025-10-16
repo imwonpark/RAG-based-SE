@@ -20,7 +20,6 @@ class DocumentLoader:
 
     def __init__(self, data_dir: Optional[str] = None): 
         if data_dir is None:
-            # Get the script's directory and construct path to data/raw
             script_dir = Path(__file__).parent
             self.data_dir = script_dir.parent.parent / "data" / "raw"
         else:
